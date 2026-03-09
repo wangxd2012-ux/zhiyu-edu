@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智御教育智能体 - 166基地专属演示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .tech-bg { background: linear-gradient(135deg, #020617 0%, #0c4a6e 100%); }
+        .glass { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); }
+        .report-card { border: 1px solid #e2e8f0; transition: all 0.3s; }
+        .report-card:hover { border-color: #3b82f6; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1); }
+        @keyframes pulse-custom { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .analyzing { animation: pulse-custom 1.2s infinite; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-900 font-sans">
+
+    <nav class="fixed w-full z-50 glass shadow-sm px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">智</div>
+            <div>
+                <h1 class="text-lg font-black text-blue-950 leading-none">智御教育智能体</h1>
+                <p class="text-[10px] text-blue-600 font-bold tracking-widest uppercase">Zhiyu AI Education</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="text-xs text-slate-400 hidden md:block">飞行技术（北京）有限公司</span>
+            <a href="#demo" class="bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-blue-800 shadow-md">立即体验</a>
+        </div>
+    </nav>
+
+    <section class="tech-bg pt-40 pb-24 px-6 text-center text-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                懂教育，更懂你的未来
+            </h2>
+            <p class="text-lg text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed opacity-90">
+                智御是学生高中三年的 AI 导师，是教师的智能助手。<br>
+                基于 166 基地数据重构，提供画像、分析、规划及志愿填报全流程服务。
+            </p>
+        </div>
+    </section>
+
+    <section id="demo" class="py-20 px-6 -mt-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden min-h-[600px] flex flex-col">
+                
+                <div class="bg-slate-50 px-8 py-4 border-b flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    <span>Zhiyu Lab / 智能实验室</span>
+                    <span id="currentStatus">Ready to boot</span>
+                </div>
+
+                <div class="flex-grow p-8 md:p-12 flex flex-col justify-center">
+                    
+                    <div id="view-init" class="text-center space-y-8">
+                        <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto text-5xl shadow-inner">🎯</div>
+                        <h3 class="text-2xl font-bold text-slate-800">启动深度成长分析</h3>
+                        <p class="text-slate-500 max-w-sm mx-auto">我们将模拟调取 166 基地某学子高中三年的多维数据进行 AI 重构。</p>
+                        <button onclick="startProcessing()" class="group relative bg-blue-700 text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-blue-800 transition-all shadow-xl">
+                            生成全维成长报告
+                            <span class="block text-[10px] opacity-60 font-normal">START AI RECONSTRUCTION</span>
+                        </button>
+                    </div>
+
+                    <div id="view-loading" class="hidden space-y-12">
+                        <div class="space-y-4">
+                            <div class="flex justify-between text-sm font-bold text-blue-900">
+                                <span id="progressLabel">正在初始化引擎...</span>
+                                <span id="percentNum">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-1 shadow-inner">
+                                <div id="bar" class="bg-blue-600 h-full w-0 rounded-full transition-all duration-300 shadow-sm"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div id="node1" class="text-[10px] p-3 border rounded-lg text-slate-300 transition-all font-mono italic">DATA_SYNC</div>
+                            <div id="node2" class="text-[10px] p-3 border rounded-lg text-slate-300 transition-all font-mono italic">PROFILE_MAP</div>
+                            <div id="node3" class="text-[10px] p-3 border rounded-lg text-slate-300 transition-all font-mono italic">CAREER_MATCH</div>
+                            <div id="node4" class="text-[10px] p-3 border rounded-lg text-slate-300 transition-all font-mono italic">FINAL_RECON</div>
+                        </div>
+                    </div>
+
+                    <div id="view-report" class="hidden space-y-8 animate-in fade-in duration-700">
+                        
+                        <div class="flex justify-between items-start border-b-4 border-blue-900 pb-6 mb-8">
+                            <div>
+                                <h4 class="text-3xl font-black text-blue-950 tracking-tighter uppercase">智御·全维成长白皮书</h4>
+                                <p class="text-sm font-bold text-blue-600">ZHIYU CAREER & GROWTH REPORT</p>
+                            </div>
+                            <div class="text-right font-mono text-xs">
+                                <p class="text-slate-400">报告生成时间：2026/03/09</p>
+                                <p class="text-blue-700 font-bold">BATCH: 166-BASE-PRO-01</p>
+                            </div>
+                        </div>
+
+                        <div class="report-card p-6 rounded-2xl bg-white">
+                            <h5 class="font-black text-blue-900 mb-4 flex items-center">
+                                <span class="w-5 h-5 bg-blue-900 text-white rounded-full flex items-center justify-center text-[10px] mr-2 italic">01</span>
+                                核心特质画像重构 (Psychological & Academic Profile)
+                            </h5>
+                            <div class="grid md:grid-cols-3 gap-6 items-center">
+                                <div class="col-span-2 space-y-3">
+                                    <p class="text-sm leading-relaxed text-slate-600 italic">
+                                        基于 166 基地三年历次模考数据，该生表现出极强的<strong class="text-blue-800">抽象逻辑转化能力</strong>。在复杂数理模型解析上，其思维斜率优于同届 97% 的学子。
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded text-[10px] font-bold">逻辑建模 A+</span>
+                                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded text-[10px] font-bold">语言组织 B+</span>
+                                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded text-[10px] font-bold">抗压韧性 A</span>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-50 p-4 rounded-xl text-center border">
+                                    <div class="text-[10px] text-slate-400 uppercase font-bold">综合推荐指数</div>
+                                    <div class="text-3xl font-black text-blue-700">94.8</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="report-card p-6 rounded-2xl bg-blue-50 border-blue-100">
+                                <h5 class="font-black text-blue-900 mb-4">02. 职业发展导航</h5>
+                                <ul class="space-y-4 text-sm">
+                                    <li class="flex justify-between items-center border-b border-blue-200 pb-2">
+                                        <span class="text-slate-500">建议首选赛道</span>
+                                        <span class="font-black text-blue-800">航空航天 / AI 系统架构</span>
+                                    </li>
+                                    <li class="flex justify-between items-center border-b border-blue-200 pb-2">
+                                        <span class="text-slate-500">性格匹配行业</span>
+                                        <span class="font-black text-blue-800">精密制造与前沿研发</span>
+                                    </li>
+                                    <p class="text-[10px] text-blue-400 italic">智御建议：该生属于“研究型(R)+专家型(E)”人格组合。</p>
+                                </ul>
+                            </div>
+                            <div class="report-card p-6 rounded-2xl bg-slate-900 text-white">
+                                <h5 class="font-black text-blue-300 mb-4">03. 高考志愿矩阵 (2026)</h5>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="bg-red-600 px-2 py-0.5 rounded text-[10px] font-black uppercase">CHALLENGE</span>
+                                        <span class="font-bold">清华大学 - 计算机/智控类</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="bg-blue-600 px-2 py-0.5 rounded text-[10px] font-black uppercase">STABLE</span>
+                                        <span class="font-bold">北航 - 机器人工程(实验班)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="bg-green-600 px-2 py-0.5 rounded text-[10px] font-black uppercase">SAFE</span>
+                                        <span class="font-bold">哈工大 - 航天电子信息</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="report-card p-6 rounded-2xl bg-amber-50 border-amber-200 relative overflow-hidden">
+                            <div class="absolute -right-4 -bottom-4 text-amber-100 text-7xl font-black italic select-none">ADVISOR</div>
+                            <h5 class="font-black text-amber-900 mb-3 italic">—— 智御 AI 导师寄语 ——</h5>
+                            <p class="text-sm text-amber-800 leading-relaxed relative z-10 font-medium">
+                                “在 166 基地过去的 820 天里，你的进步曲线斜率超过了全校 90% 的同学。根据模型推算，你在考试‘后半程’容易因体力消耗出现计算精度下降，建议在高三冲刺阶段重点强化‘后期抗疲劳训练’。智御将陪你走完填报志愿前的最后一步。”
+                            </p>
+                        </div>
+
+                        <div class="text-center pt-8">
+                            <button onclick="location.reload()" class="text-slate-400 hover:text-blue-600 text-xs font-bold transition">← 重新启动测试环境</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center space-y-2 border-t">
+        <p class="text-slate-400 text-xs uppercase font-bold tracking-widest">Powered by Flying Technology (Beijing) Co., Ltd.</p>
+        <p class="text-slate-300 text-[10px]">166 基地教务处 智慧教育联合实验室 专用演示版</p>
+    </footer>
+
+    <script>
+        function startProcessing() {
+            const views = {
+                init: document.getElementById('view-init'),
+                loading: document.getElementById('view-loading'),
+                report: document.getElementById('view-report')
+            };
+            const bar = document.getElementById('bar');
+            const percentNum = document.getElementById('percentNum');
+            const statusLabel = document.getElementById('progressLabel');
+            const currentStatus = document.getElementById('currentStatus');
+
+            // 切换视图
+            views.init.classList.add('hidden');
+            views.loading.classList.remove('hidden');
+            currentStatus.innerText = "Processing Data...";
+            currentStatus.classList.add('analyzing', 'text-blue-600');
+
+            // 模拟理科模式的分段重构逻辑
+            const steps = [
+                { p: 20, l: "正在同步 166 基地学籍档案...", n: "node1" },
+                { p: 45, l: "正在重构三维能力雷达模型...", n: "node2" },
+                { p: 75, l: "正在匹配 2026 高考录取位次...", n: "node3" },
+                { p: 100, l: "生成 AI 导师全周期建议...", n: "node4" }
+            ];
+
+            let i = 0;
+            const runStep = () => {
+                if(i < steps.length) {
+                    const step = steps[i];
+                    bar.style.width = step.p + "%";
+                    percentNum.innerText = step.p + "%";
+                    statusLabel.innerText = step.l;
+                    
+                    const node = document.getElementById(step.n);
+                    node.classList.remove('text-slate-300');
+                    node.classList.add('text-blue-700', 'border-blue-700', 'font-bold', 'bg-blue-50');
+
+                    i++;
+                    setTimeout(runStep, 1000);
+                } else {
+                    setTimeout(() => {
+                        views.loading.classList.add('hidden');
+                        views.report.classList.remove('hidden');
+                        currentStatus.innerText = "Report Generated";
+                        currentStatus.classList.remove('analyzing', 'text-blue-600');
+                        currentStatus.classList.add('text-green-600');
+                    }, 500);
+                }
+            };
+
+            runStep();
+        }
+    </script>
+</body>
+</html>
