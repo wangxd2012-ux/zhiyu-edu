@@ -3,151 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智御 (Zhiyu) | 高中三年数字化成长伙伴 - 166 基地智慧教育枢纽</title>
+    <title>智御 (Zhiyu) | 懂教育，更懂您 - 166 基地全维智慧教育门户</title>
     <style>
         :root {
             --blue: #3498db; --navy: #050a16; --gold: #f1c40f; 
             --glass: rgba(13, 25, 48, 0.98); --green: #10b981; --text: #e2e8f0;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-        body { background-color: var(--navy); color: var(--text); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; }
+        body { background-color: var(--navy); color: var(--text); font-family: "PingFang SC", sans-serif; line-height: 1.6; }
 
-        /* 全局背景 */
+        /* 背景：确保不会遮挡 */
         .master-bg { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 50% 50%, #1a2a4a 0%, #050a16 100%); }
-        .grid-tech { position: absolute; inset: 0; background-image: linear-gradient(rgba(52,152,219,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(52,152,219,0.05) 1px, transparent 1px); background-size: 60px 60px; }
 
-        /* 导航 */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(5, 10, 22, 0.95); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(52, 152, 219, 0.3); position: sticky; top: 0; z-index: 1000; }
+        /* [核心修复] 强化导航：增加极高 Z-Index 和显眼对比 */
+        nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 60px; 
+            background: rgba(10, 20, 40, 0.95); 
+            border-bottom: 2px solid var(--blue);
+            position: fixed; top: 0; left: 0; width: 100%; 
+            z-index: 9999; /* 极高层级 */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
         .logo-box { display: flex; align-items: center; gap: 12px; }
-        .logo-circle { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--blue); }
-        .nav-links { display: flex; gap: 30px; font-size: 14px; }
-        .nav-links a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
-        .nav-links a:hover { color: var(--blue); }
-
-        /* 品牌核心 */
-        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        header h1 { font-size: 64px; font-weight: 900; background: linear-gradient(to bottom, #fff, var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; }
-        header p { font-size: 22px; color: #94a3b8; margin-top: 20px; letter-spacing: 6px; }
-
-        /* 演示实验室 */
-        section { padding: 100px 60px; max-width: 1300px; margin: 0 auto; }
-        .lab-box { background: #000; border: 1px solid #1e293b; border-radius: 35px; padding: 45px; min-height: 600px; position: relative; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
-        .btn-main { background: var(--blue); color: #fff; border: none; padding: 18px 50px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 25px rgba(52,152,219,0.4); transition: 0.3s; }
-        .btn-main:hover { transform: scale(1.05); filter: brightness(1.1); }
-
-        .logs { font-family: 'Consolas', monospace; font-size: 14px; color: var(--green); margin-bottom: 30px; height: 110px; line-height: 1.8; }
+        .logo-circle { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 15px var(--blue); }
         
-        /* 增强版五维报告 */
-        .zhiyu-report { display: none; background: var(--glass); border: 1px solid var(--gold); border-radius: 25px; padding: 45px; animation: slideUp 0.8s forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        /* 导航链接修复：确保颜色高亮 */
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: #fff !important; text-decoration: none; font-size: 14px; font-weight: bold; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold) !important; text-shadow: 0 0 10px var(--gold); }
 
-        .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
-        .dim-card { background: rgba(255,255,255,0.03); border-radius: 18px; padding: 25px; border-left: 5px solid var(--blue); }
-        .dim-card h4 { color: var(--blue); margin-bottom: 12px; font-size: 17px; }
-        .dim-card p { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+        /* 内容区偏移，防止被固定导航遮挡 */
+        .content-wrapper { padding-top: 100px; max-width: 1200px; margin: 0 auto; }
 
-        /* 申请功能交互 */
-        .apply-zone { background: rgba(52,152,219,0.05); border: 1px solid rgba(52,152,219,0.1); border-radius: 45px; padding: 100px 60px; text-align: center; margin-top: 50px; }
-        .apply-form { display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 40px; }
-        .input-box { background: rgba(0,0,0,0.4); border: 1px solid #334155; padding: 18px 30px; border-radius: 15px; color: #fff; width: 450px; outline: none; transition: 0.4s; font-size: 16px; }
-        .input-box:focus { border-color: var(--blue); box-shadow: 0 0 20px rgba(52,152,219,0.2); }
-        .success-box { display: none; padding: 35px; border-radius: 20px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--green); color: var(--green); animation: slideUp 0.5s forwards; }
+        header { padding: 60px 20px; text-align: center; }
+        header h1 { font-size: 60px; background: linear-gradient(to bottom, #fff, var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand-slogan { font-size: 28px; color: var(--gold); margin-top: 15px; letter-spacing: 5px; font-weight: 600; }
 
-        footer { text-align: center; padding: 80px; color: #475569; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; }
+        section { padding: 60px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        
+        /* 1. 数据大屏 */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stat-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; text-align: center; border: 1px solid var(--blue); }
+        .stat-card b { font-size: 36px; color: var(--blue); display: block; }
+
+        /* 2. 功能家族 */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--glass); padding: 30px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        .card h3 { color: var(--blue); margin-bottom: 15px; }
+
+        /* 3. 演示实验室 */
+        .terminal { background: #000; padding: 40px; border-radius: 30px; border: 1px solid #1e293b; position: relative; }
+        .btn-boot { background: var(--blue); color: #fff; border: none; padding: 15px 45px; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        .log-stream { font-family: monospace; color: var(--green); height: 100px; margin: 20px 0; font-size: 14px; }
+
+        /* 报告内容 */
+        .report-box { display: none; background: rgba(255,255,255,0.02); border: 1px solid var(--gold); padding: 30px; border-radius: 20px; }
+        .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .report-item { border-left: 4px solid var(--blue); padding-left: 15px; }
+
+        /* 4. 申请入口 */
+        .apply-form { text-align: center; background: rgba(52, 152, 219, 0.05); padding: 60px; border-radius: 30px; }
+        .input-line { background: #000; border: 1px solid #334155; padding: 15px 25px; border-radius: 12px; color: #fff; width: 350px; margin-bottom: 20px; outline: none; }
+        .success-box { display: none; color: var(--green); font-weight: bold; font-size: 18px; margin-top: 20px; }
+
+        footer { text-align: center; padding: 60px; color: #475569; font-size: 12px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
-    <div class="master-bg"><div class="grid-tech"></div></div>
+    <div class="master-bg"></div>
 
     <nav>
         <div class="logo-box">
             <div class="logo-circle">智</div>
-            <div><b style="font-size: 18px;">智御 (Zhiyu AI)</b><p style="font-size: 9px; color: var(--blue); letter-spacing: 1px;">Academic Affairs Lab</p></div>
+            <b style="font-size: 20px; letter-spacing: 1px;">智御 (Zhiyu AI)</b>
         </div>
-        <div class="nav-links"><a href="#about">系统定位</a><a href="#demo">全维演示</a><a href="#apply" style="color:var(--gold); font-weight:bold;">申请测试</a></div>
+        <div class="nav-links">
+            <a href="#dashboard">决策大屏</a>
+            <a href="#family">功能家族</a>
+            <a href="#lab">重构实验</a>
+            <a href="#apply" style="color: var(--gold) !important;">申请测试</a>
+        </div>
+        <div style="font-size: 10px; color: var(--blue); text-transform: uppercase;">166 Base Hub</div>
     </nav>
 
-    <header id="about">
-        <h1>智御 · 全维成长导航</h1>
-        <p>166 基地数字化陪伴系统</p>
-    </header>
+    <div class="content-wrapper">
+        <header id="top">
+            <h1>智御 · 全维成长导航</h1>
+            <div class="brand-slogan">智御懂教育，更懂您</div>
+        </header>
 
-    <section id="demo">
-        <div class="lab-box">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <button class="btn-main" onclick="bootZhiyu()">立即启动 166 基地全量重构演示</button>
+        <section id="dashboard">
+            <div class="section-header"><h2>166 基地教务指挥舱</h2></div>
+            <div class="stats-grid">
+                <div class="stat-card"><b>50</b><p>强基种子选手</p></div>
+                <div class="stat-card"><b>96.5%</b><p>画像对齐率</p></div>
+                <div class="stat-card"><b>68%</b><p>教师减负比</p></div>
+                <div class="stat-card"><b>1248</b><p>断层定位数</p></div>
             </div>
-            <div class="logs" id="log-output"></div>
-            
-            <div class="zhiyu-report" id="report">
-                <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:20px; margin-bottom:30px;">
-                    <b style="color:var(--gold); font-size:24px;">智御 · 学子全维成长导航报告</b>
-                    <span style="font-size:12px; color:#475569; font-family: monospace;">AUTHENTICATED BY 166 BASE</span>
+        </section>
+
+        <section id="family">
+            <div class="section-header"><h2>核心功能家族</h2></div>
+            <div class="card-grid">
+                <div class="card"><h3>👨‍🏫 学业导师</h3><p>高中三年伴随，记录每一次思维飞跃，识别隐藏竞争力。</p></div>
+                <div class="card"><h3>🧭 规划专家</h3><p>提供强基计划、综合评价等多元升学路径模拟与志愿辅导。</p></div>
+                <div class="card"><h3>🛠️ 教务助教</h3><p>自动化生成学情简报，实现个性化作业分层，减轻行政压力。</p></div>
+            </div>
+        </section>
+
+        <section id="lab">
+            <div class="section-header"><h2>全维数据重构演示</h2></div>
+            <div class="terminal">
+                <div style="text-align: center;">
+                    <button class="btn-boot" onclick="runZhiyu()">一键启动：166 基地全量重构演示</button>
                 </div>
-
-                <div class="report-grid">
-                    <div class="dim-card">
-                        <h4>🧠 学业思维重构</h4>
-                        <p>识别到该生在“变力做功”场景中存在系统性逻辑断层。建议：补全临界状态下的非平衡态受力分析。已推送“手术刀”思维训练包。</p>
+                <div class="log-stream" id="log-con"></div>
+                
+                <div class="report-box" id="report-view">
+                    <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom:15px; margin-bottom:20px;">
+                        <b style="color:var(--gold); font-size:22px;">学子全维成长导航报告</b>
                     </div>
-                    <div class="dim-card" style="border-left-color: var(--gold);">
-                        <h4>✨ 学科潜能发现</h4>
-                        <p>数理对齐度 94.2%。识别到极强的“算法架构”直觉。被标记为“学术领航苗子”。方向：空天动力、通用智能底层架构。</p>
-                    </div>
-                    <div class="dim-card" style="border-left-color: #9b59b6;">
-                        <h4>🌱 心理韧性评价</h4>
-                        <p>展现出卓越的“反脆弱性”心理特质。面对未知模型时的认知重构速度优于 91% 的同龄人，具备顶尖科研攻关的心理厚度。</p>
-                    </div>
-                    <div class="dim-card" style="border-left-color: var(--green);">
-                        <h4>🧭 生涯决策建议</h4>
-                        <p>推荐：强基计划。目标：清华大学（行健书院）、北航（沈元荣誉学院）。建议高二下学期重点加强物理竞赛衔接。</p>
+                    <div class="report-grid">
+                        <div class="report-item"><h4>学业重构</h4><p>识别到力学模型逻辑断层，已推送“手术刀”修复包。</p></div>
+                        <div class="report-item"><h4>潜能识别</h4><p>数理对齐度 96.5%，匹配空天动力强基方向。</p></div>
+                        <div class="report-item"><h4>心理韧性</h4><p>反脆弱性极佳，适合承担高强度学术科研任务。</p></div>
+                        <div class="report-item"><h4>生涯建议</h4><p>首选：清华大学行健书院。建议锁定强基名额。</p></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="apply">
-        <div class="apply-zone">
-            <h2>申请 166 基地正式测试</h2>
-            <form class="apply-form" id="applyForm" onsubmit="handleApply(event)">
-                <input type="text" class="input-box" placeholder="请输入学校/班级名称" required>
-                <input type="tel" class="input-box" placeholder="请输入 11 位手机号" required pattern="[0-9]{11}">
-                <button type="submit" class="btn-main" style="margin-top: 20px;">立即提交申请</button>
-            </form>
-            <div id="success" class="success-box">
-                <h3 style="margin-bottom: 10px;">✓ 申请同步成功！</h3>
-                <p>智御专家将在 24 小时内联系您并开通测试账号。</p>
+        <section id="apply">
+            <div class="apply-form">
+                <div class="section-header"><h2>申请 166 基地正式测试</h2></div>
+                <form id="form-body" onsubmit="handleApply(event)">
+                    <input type="text" class="input-line" placeholder="学校/班级名称" required>
+                    <input type="tel" class="input-line" placeholder="11位手机号" required pattern="[0-9]{11}">
+                    <button type="submit" class="btn-boot">提交申请并同步后台</button>
+                </form>
+                <div id="success-msg" class="success-box">✓ 申请成功！专家将在 24 小时内为您开通测试权限。</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>飞行技术（北京）有限公司 | 166 基地教务处 AI 实验室 © 2026</footer>
+        <footer>飞行技术（北京）有限公司 | 166 基地教务处 AI 实验室 © 2026</footer>
+    </div>
 
     <script>
-        function bootZhiyu() {
-            const out = document.getElementById('log-output');
-            const rep = document.getElementById('report');
-            const steps = [
-                "> [SYSTEM] 正在调取 166 基地全量数据轨迹...",
-                "> [ANALYSIS] 启动理科分段重构引擎，扫描逻辑断层...",
-                "> [NLP] 启动文科整体点评，提取格局指标...",
-                "> [TALENT] 匹配强基计划模型，计算对齐率...",
-                "> [REPORT] 汇总 50+ 维度数据流，生成全维画像..."
-            ];
+        function runZhiyu() {
+            const out = document.getElementById('log-con');
+            const rep = document.getElementById('report-view');
+            const txt = ["> 调取 166 基地全量数据轨迹...", "> 扫描理科逻辑断层节点...", "> 匹配强基计划人才模型...", "> 构建数字化成长画像成功!"];
             out.innerHTML = ""; rep.style.display = "none";
-            let s = 0;
+            let i = 0;
             const t = setInterval(() => {
-                const l = document.createElement('div'); l.innerText = steps[s++]; out.appendChild(l);
-                if(s >= steps.length) { clearInterval(t); setTimeout(() => { rep.style.display = "block"; window.scrollTo({ top: document.getElementById('demo').offsetTop + 300, behavior: 'smooth' }); }, 1000); }
-            }, 1200);
+                const l = document.createElement('div'); l.innerText = txt[i++]; out.appendChild(l);
+                if(i >= txt.length) { 
+                    clearInterval(t); 
+                    setTimeout(() => { rep.style.display = "block"; }, 500); 
+                }
+            }, 1000);
         }
 
         function handleApply(e) {
             e.preventDefault();
-            const b = e.target.querySelector('button');
-            b.disabled = true; b.innerText = "正在同步中心...";
-            setTimeout(() => { e.target.style.display = 'none'; document.getElementById('success').style.display = 'block'; }, 2000);
+            document.getElementById('form-body').style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
         }
     </script>
 </body>
