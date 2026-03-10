@@ -81,4 +81,74 @@
             
             <div class="zhiyu-report" id="report">
                 <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:20px; margin-bottom:30px;">
-                    <b style="color:var(--gold); font-size:2
+                    <b style="color:var(--gold); font-size:24px;">智御 · 学子全维成长导航报告</b>
+                    <span style="font-size:12px; color:#475569; font-family: monospace;">AUTHENTICATED BY 166 BASE</span>
+                </div>
+
+                <div class="report-grid">
+                    <div class="dim-card">
+                        <h4>🧠 学业思维重构</h4>
+                        <p>识别到该生在“变力做功”场景中存在系统性逻辑断层。建议：补全临界状态下的非平衡态受力分析。已推送“手术刀”思维训练包。</p>
+                    </div>
+                    <div class="dim-card" style="border-left-color: var(--gold);">
+                        <h4>✨ 学科潜能发现</h4>
+                        <p>数理对齐度 94.2%。识别到极强的“算法架构”直觉。被标记为“学术领航苗子”。方向：空天动力、通用智能底层架构。</p>
+                    </div>
+                    <div class="dim-card" style="border-left-color: #9b59b6;">
+                        <h4>🌱 心理韧性评价</h4>
+                        <p>展现出卓越的“反脆弱性”心理特质。面对未知模型时的认知重构速度优于 91% 的同龄人，具备顶尖科研攻关的心理厚度。</p>
+                    </div>
+                    <div class="dim-card" style="border-left-color: var(--green);">
+                        <h4>🧭 生涯决策建议</h4>
+                        <p>推荐：强基计划。目标：清华大学（行健书院）、北航（沈元荣誉学院）。建议高二下学期重点加强物理竞赛衔接。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply">
+        <div class="apply-zone">
+            <h2>申请 166 基地正式测试</h2>
+            <form class="apply-form" id="applyForm" onsubmit="handleApply(event)">
+                <input type="text" class="input-box" placeholder="请输入学校/班级名称" required>
+                <input type="tel" class="input-box" placeholder="请输入 11 位手机号" required pattern="[0-9]{11}">
+                <button type="submit" class="btn-main" style="margin-top: 20px;">立即提交申请</button>
+            </form>
+            <div id="success" class="success-box">
+                <h3 style="margin-bottom: 10px;">✓ 申请同步成功！</h3>
+                <p>智御专家将在 24 小时内联系您并开通测试账号。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>飞行技术（北京）有限公司 | 166 基地教务处 AI 实验室 © 2026</footer>
+
+    <script>
+        function bootZhiyu() {
+            const out = document.getElementById('log-output');
+            const rep = document.getElementById('report');
+            const steps = [
+                "> [SYSTEM] 正在调取 166 基地全量数据轨迹...",
+                "> [ANALYSIS] 启动理科分段重构引擎，扫描逻辑断层...",
+                "> [NLP] 启动文科整体点评，提取格局指标...",
+                "> [TALENT] 匹配强基计划模型，计算对齐率...",
+                "> [REPORT] 汇总 50+ 维度数据流，生成全维画像..."
+            ];
+            out.innerHTML = ""; rep.style.display = "none";
+            let s = 0;
+            const t = setInterval(() => {
+                const l = document.createElement('div'); l.innerText = steps[s++]; out.appendChild(l);
+                if(s >= steps.length) { clearInterval(t); setTimeout(() => { rep.style.display = "block"; window.scrollTo({ top: document.getElementById('demo').offsetTop + 300, behavior: 'smooth' }); }, 1000); }
+            }, 1200);
+        }
+
+        function handleApply(e) {
+            e.preventDefault();
+            const b = e.target.querySelector('button');
+            b.disabled = true; b.innerText = "正在同步中心...";
+            setTimeout(() => { e.target.style.display = 'none'; document.getElementById('success').style.display = 'block'; }, 2000);
+        }
+    </script>
+</body>
+</html>
