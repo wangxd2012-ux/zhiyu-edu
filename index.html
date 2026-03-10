@@ -3,235 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智御教育智能体 | 166基地智慧教育枢纽</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>智御 (Zhiyu) | 高中三年数字化成长伙伴 - 166 基地智慧教育枢纽</title>
     <style>
-        .tech-bg { background: linear-gradient(135deg, #020617 0%, #0c4a6e 100%); }
-        .glass { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px); }
-        .report-card { border: 1px solid #e2e8f0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .report-card:hover { border-color: #3b82f6; transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.1); }
-        @keyframes pulse-custom { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        .analyzing { animation: pulse-custom 1.2s infinite; }
-        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        :root {
+            --blue: #3498db; --navy: #050a16; --gold: #f1c40f; 
+            --glass: rgba(13, 25, 48, 0.98); --green: #10b981; --text: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: var(--navy); color: var(--text); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; }
+
+        /* 全局背景 */
+        .master-bg { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 50% 50%, #1a2a4a 0%, #050a16 100%); }
+        .grid-tech { position: absolute; inset: 0; background-image: linear-gradient(rgba(52,152,219,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(52,152,219,0.05) 1px, transparent 1px); background-size: 60px 60px; }
+
+        /* 导航 */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(5, 10, 22, 0.95); backdrop-filter: blur(25px); border-bottom: 1px solid rgba(52, 152, 219, 0.3); position: sticky; top: 0; z-index: 1000; }
+        .logo-box { display: flex; align-items: center; gap: 12px; }
+        .logo-circle { width: 40px; height: 40px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--blue); }
+        .nav-links { display: flex; gap: 30px; font-size: 14px; }
+        .nav-links a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
+        .nav-links a:hover { color: var(--blue); }
+
+        /* 品牌核心 */
+        header { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        header h1 { font-size: 64px; font-weight: 900; background: linear-gradient(to bottom, #fff, var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; }
+        header p { font-size: 22px; color: #94a3b8; margin-top: 20px; letter-spacing: 6px; }
+
+        /* 演示实验室 */
+        section { padding: 100px 60px; max-width: 1300px; margin: 0 auto; }
+        .lab-box { background: #000; border: 1px solid #1e293b; border-radius: 35px; padding: 45px; min-height: 600px; position: relative; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+        .btn-main { background: var(--blue); color: #fff; border: none; padding: 18px 50px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 10px 25px rgba(52,152,219,0.4); transition: 0.3s; }
+        .btn-main:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        .logs { font-family: 'Consolas', monospace; font-size: 14px; color: var(--green); margin-bottom: 30px; height: 110px; line-height: 1.8; }
+        
+        /* 增强版五维报告 */
+        .zhiyu-report { display: none; background: var(--glass); border: 1px solid var(--gold); border-radius: 25px; padding: 45px; animation: slideUp 0.8s forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
+        .dim-card { background: rgba(255,255,255,0.03); border-radius: 18px; padding: 25px; border-left: 5px solid var(--blue); }
+        .dim-card h4 { color: var(--blue); margin-bottom: 12px; font-size: 17px; }
+        .dim-card p { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+
+        /* 申请功能交互 */
+        .apply-zone { background: rgba(52,152,219,0.05); border: 1px solid rgba(52,152,219,0.1); border-radius: 45px; padding: 100px 60px; text-align: center; margin-top: 50px; }
+        .apply-form { display: flex; flex-direction: column; align-items: center; gap: 25px; margin-top: 40px; }
+        .input-box { background: rgba(0,0,0,0.4); border: 1px solid #334155; padding: 18px 30px; border-radius: 15px; color: #fff; width: 450px; outline: none; transition: 0.4s; font-size: 16px; }
+        .input-box:focus { border-color: var(--blue); box-shadow: 0 0 20px rgba(52,152,219,0.2); }
+        .success-box { display: none; padding: 35px; border-radius: 20px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--green); color: var(--green); animation: slideUp 0.5s forwards; }
+
+        footer { text-align: center; padding: 80px; color: #475569; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+<body>
+    <div class="master-bg"><div class="grid-tech"></div></div>
 
-    <nav class="fixed w-full z-50 glass shadow-sm px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">智</div>
-            <div>
-                <h1 class="text-lg font-black text-blue-950 leading-none">智御教育智能体</h1>
-                <p class="text-[10px] text-blue-600 font-bold tracking-widest uppercase">Zhiyu AI Education</p>
-            </div>
+    <nav>
+        <div class="logo-box">
+            <div class="logo-circle">智</div>
+            <div><b style="font-size: 18px;">智御 (Zhiyu AI)</b><p style="font-size: 9px; color: var(--blue); letter-spacing: 1px;">Academic Affairs Lab</p></div>
         </div>
-        <div class="hidden md:flex items-center space-x-8 text-sm font-bold text-slate-600">
-            <a href="#about" class="hover:text-blue-700 transition">智能体介绍</a>
-            <a href="#projects" class="hover:text-blue-700 transition">试用项目</a>
-            <a href="#demo" class="bg-blue-700 text-white px-6 py-2 rounded-full hover:bg-blue-800 shadow-md">实验室入口</a>
-        </div>
+        <div class="nav-links"><a href="#about">系统定位</a><a href="#demo">全维演示</a><a href="#apply" style="color:var(--gold); font-weight:bold;">申请测试</a></div>
     </nav>
 
-    <section class="tech-bg pt-48 pb-32 px-6 text-center text-white">
-        <div class="max-w-4xl mx-auto">
-            <span class="inline-block px-4 py-1 border border-blue-400 rounded-full text-xs font-bold mb-6 tracking-widest text-blue-300 uppercase">166 Base Exclusive</span>
-            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-tight">
-                全链路智慧教育 <br><span class="text-blue-400 italic font-serif">重构</span> 成长可能
-            </h2>
-            <p class="text-xl text-blue-100 mb-12 max-w-2xl mx-auto opacity-90 font-medium">
-                智御不仅是工具，更是 166 基地学子高中三年的数字化伴侣。通过多智能体协作技术，实现教学相长的深度闭环。
-            </p>
-        </div>
-    </section>
+    <header id="about">
+        <h1>智御 · 全维成长导航</h1>
+        <p>166 基地数字化陪伴系统</p>
+    </header>
 
-    <section id="about" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h3 class="text-3xl font-black text-blue-950 mb-4">核心智能体家族</h3>
-            <div class="w-16 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="report-card bg-white p-8 rounded-3xl">
-                <div class="text-3xl mb-4">👨‍🏫</div>
-                <h4 class="text-xl font-bold text-blue-900 mb-3">智御·学业导师</h4>
-                <p class="text-sm text-slate-500 mb-6">基于 166 基地学科大纲，实时解答疑难点，为每个学生生成个性化知识图谱，精准识别知识盲区。</p>
-                <ul class="text-xs space-y-2 text-blue-700 font-bold">
-                    <li>• 24/7 知识点解析</li>
-                    <li>• 弱项针对性推题</li>
-                </ul>
+    <section id="demo">
+        <div class="lab-box">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <button class="btn-main" onclick="bootZhiyu()">立即启动 166 基地全量重构演示</button>
             </div>
-            <div class="report-card bg-white p-8 rounded-3xl">
-                <div class="text-3xl mb-4">🧭</div>
-                <h4 class="text-xl font-bold text-blue-900 mb-3">智御·规划专家</h4>
-                <p class="text-sm text-slate-500 mb-6">深度分析学生性格、兴趣及成绩走势，提供强基计划、综合评价招生等多元升学路径模拟。</p>
-                <ul class="text-xs space-y-2 text-blue-700 font-bold">
-                    <li>• 高考志愿模拟填报</li>
-                    <li>• 职业倾向深度测评</li>
-                </ul>
-            </div>
-            <div class="report-card bg-white p-8 rounded-3xl">
-                <div class="text-3xl mb-4">🛠️</div>
-                <h4 class="text-xl font-bold text-blue-900 mb-3">智御·教务助教</h4>
-                <p class="text-sm text-slate-500 mb-6">面向 166 基地教师，自动化生成班级学情分析报告，识别掉队风险，协助教师完成个性化作业分层。</p>
-                <ul class="text-xs space-y-2 text-blue-700 font-bold">
-                    <li>• 班级学情实时监测</li>
-                    <li>• 自动化公文排版</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-24 bg-slate-900 text-white px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-slate-700 pb-8">
-                <div>
-                    <h3 class="text-3xl font-black mb-2">实战试用项目</h3>
-                    <p class="text-slate-400">智御在 166 基地的真实落地应用场景</p>
-                </div>
-                <div class="text-[10px] font-mono tracking-widest text-blue-500 mt-4 md:mt-0 uppercase">Running in Production</div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="group cursor-pointer">
-                    <div class="overflow-hidden rounded-2xl mb-6 bg-slate-800 aspect-video flex items-center justify-center text-4xl border border-slate-700 group-hover:border-blue-500 transition">📈</div>
-                    <h5 class="text-xl font-bold mb-2">强基计划专项画像项目</h5>
-                    <p class="text-sm text-slate-400 italic">为高二理科实验班 50 名学生建立深度画像，识别适合强基招生的学术潜质人才，匹配准确率达 94%。</p>
-                </div>
-                <div class="group cursor-pointer">
-                    <div class="overflow-hidden rounded-2xl mb-6 bg-slate-800 aspect-video flex items-center justify-center text-4xl border border-slate-700 group-hover:border-blue-500 transition">📅</div>
-                    <h5 class="text-xl font-bold mb-2">高三志愿填报压力测试</h5>
-                    <p class="text-sm text-slate-400 italic">模拟 2026 届高考志愿大规模并发填报，基于实时位次数据进行“稳、保、冲”动态调整策略分析。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="demo" class="py-24 px-6 bg-blue-50">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-black text-blue-950 mb-4 tracking-tighter uppercase italic">Interactive Lab</h3>
-                <p class="text-slate-500">即刻启动智御引擎，体验全维数据重构流程</p>
-            </div>
+            <div class="logs" id="log-output"></div>
             
-            <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden min-h-[500px] flex flex-col border border-white">
-                <div class="bg-slate-50 px-8 py-4 border-b flex justify-between items-center text-[10px] font-black text-slate-400 tracking-widest uppercase">
-                    <span>166 Base Data Engine</span>
-                    <span id="currentStatus">Ready to boot</span>
-                </div>
-
-                <div class="flex-grow p-8 md:p-12 flex flex-col justify-center">
-                    <div id="view-init" class="text-center space-y-8">
-                        <button onclick="runSimulation()" class="bg-blue-700 text-white px-12 py-6 rounded-2xl font-black text-xl hover:bg-blue-800 transition-all shadow-xl hover:scale-105 active:scale-95">
-                            生成全维成长报告
-                        </button>
-                    </div>
-
-                    <div id="view-loading" class="hidden space-y-8 max-w-md mx-auto w-full">
-                        <div class="flex justify-between text-xs font-bold text-blue-900 mb-2 uppercase italic">
-                            <span id="statusLabel tracking-widest">Processing...</span>
-                            <span id="percentNum">0%</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                            <div id="bar" class="bg-blue-600 h-full w-0 transition-all duration-300"></div>
-                        </div>
-                        <div id="statusText" class="text-center text-[10px] text-slate-400 font-mono italic analyzing uppercase tracking-widest">Initialising Zhiyu AI Architecture...</div>
-                    </div>
-
-                    <div id="view-report" class="hidden space-y-10 fade-in">
-                        <div class="flex justify-between items-end border-b-2 border-blue-950 pb-4">
-                            <h4 class="text-2xl font-black text-blue-950 tracking-tighter uppercase leading-none">智御·学子全维报告</h4>
-                            <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-1 rounded font-black tracking-widest uppercase italic">Verified by 166 Base</span>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
-                                <p class="text-[10px] font-black text-blue-800 mb-2 uppercase tracking-widest opacity-60">Growth Profile</p>
-                                <p class="text-sm font-bold text-slate-800 italic leading-relaxed">该生在 166 基地数理体系中展现出极佳的“系统化架构”潜能。建议关注“强基计划”空天动力等前沿方向。</p>
-                            </div>
-                            <div class="bg-slate-900 p-6 rounded-2xl text-white">
-                                <p class="text-[10px] font-black text-blue-400 mb-2 uppercase tracking-widest opacity-60">Decision Support</p>
-                                <p class="text-sm font-bold">首选：清华大学 智控工程</p>
-                                <p class="text-sm font-bold">次选：北航 机器人实验班</p>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button onclick="location.reload()" class="text-slate-400 hover:text-blue-600 text-[10px] font-black tracking-widest uppercase transition">← Reset Experiment</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 px-6 max-w-4xl mx-auto text-center">
-        <div id="register" class="bg-blue-700 rounded-[3rem] p-12 md:p-20 text-white shadow-2xl relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 text-9xl font-black italic opacity-10 select-none">JOIN</div>
-            <div id="form-container">
-                <h3 class="text-3xl font-black mb-6 tracking-tighter">申请 166 基地正式试用</h3>
-                <p class="text-blue-100 mb-12 text-sm leading-relaxed max-w-md mx-auto">
-                    提交手机号，我们将为您开通完整版智御后台，并同步发送飞行技术公司出品的《智慧教育蓝皮书》。
-                </p>
-                <form action="https://formspree.io/f/mbdzdqga" method="POST" id="contact-form" class="flex flex-col md:flex-row gap-4">
-                    <input name="mobile" type="tel" required placeholder="输入您的手机号" class="flex-grow px-8 py-5 rounded-2xl text-slate-900 outline-none focus:ring-4 focus:ring-blue-300 transition-all font-bold">
-                    <button type="submit" id="submit-btn" class="bg-white text-blue-700 px-10 py-5 rounded-2xl font-black hover:bg-blue-50 transition-all shadow-lg active:scale-95">提交申请</button>
-                </form>
-            </div>
-            <div id="success-message" class="hidden py-10 fade-in">
-                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-lg">✓</div>
-                <h4 class="text-2xl font-black">申请已收到！</h4>
-                <p class="text-blue-100 mt-2">我们的专家将会在 24 小时内与您联系。</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-20 text-center opacity-30 border-t border-slate-200">
-        <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em]">Flying Technology (Beijing) Co., Ltd.</p>
-        <p class="text-slate-300 text-[9px] mt-2 italic">166 Base Academic Affairs Office - AI Education Lab © 2026</p>
-    </footer>
-
-    <script>
-        function runSimulation() {
-            const views = { init: document.getElementById('view-init'), loading: document.getElementById('view-loading'), report: document.getElementById('view-report'), status: document.getElementById('currentStatus') };
-            const bar = document.getElementById('bar');
-            const percent = document.getElementById('percentNum');
-            
-            views.init.classList.add('hidden');
-            views.loading.classList.remove('hidden');
-            views.status.innerText = "Analyzing 166 Base Data...";
-            views.status.classList.add('analyzing', 'text-blue-600');
-
-            let p = 0;
-            const timer = setInterval(() => {
-                p += Math.floor(Math.random() * 15) + 5;
-                if(p >= 100) {
-                    p = 100;
-                    clearInterval(timer);
-                    setTimeout(() => {
-                        views.loading.classList.add('hidden');
-                        views.report.classList.remove('hidden');
-                        views.status.innerText = "Analysis Complete";
-                    }, 500);
-                }
-                bar.style.width = p + "%";
-                percent.innerText = p + "%";
-            }, 300);
-        }
-
-        const form = document.getElementById('contact-form');
-        form.onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = "提交中...";
-            btn.disabled = true;
-            const formData = new FormData(form);
-            const response = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-            if (response.ok) {
-                document.getElementById('form-container').classList.add('hidden');
-                document.getElementById('success-message').classList.remove('hidden');
-            } else {
-                alert("提交失败，请重试。");
-                btn.innerText = "提交申请";
-                btn.disabled = false;
-            }
-        };
-    </script>
-</body>
-</html>
+            <div class="zhiyu-report" id="report">
+                <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:20px; margin-bottom:30px;">
+                    <b style="color:var(--gold); font-size:2
